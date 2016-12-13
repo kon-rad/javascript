@@ -68,3 +68,38 @@ var sum_pairs=function(ints, s){
 // Test.expect(sum_pairs(l7, 0)+"" == [0, 0]+"", "Zeroes: ["+l7+"] should return [0, 0] for sum = 0");
 // Test.expect(sum_pairs(l8, 10)+"" == [13, -3]+"", "Subtraction: ["+l8+"] should return [13, -3] for sum = 10");
 // });
+
+
+var sum_pairs=function(ints, s){
+
+  var count = 1,
+      length = ints.length,
+      resultIndices = [],
+      noMatches = false;
+
+  while (count < length) {
+    for(var i = 0; i < count; i++) {
+      for (var j = 0; j < count; j++) {
+        if (i != j && ints[i] + ints[j] == s) {
+          if (resultIndices.length > 0 && i > resultIndices[0][1]) {
+            return [ints[i], ints[j]];
+          } else if ( i == ints.length - 2 && resultIndices.length === 0) {
+            console.log('hi');
+            noMatches = true;
+            break;
+          }
+          resultIndices.push([i,j]);
+        }
+      }
+    }
+    count++;
+  }
+  if (noMatches)
+    return undefined;
+  return [ints[resultIndices[0][0]], ints[resultIndices[0][1]]];
+}
+
+
+
+l3= [20, -13, 40];
+sum_pairs(l3, -7)
