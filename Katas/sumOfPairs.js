@@ -69,7 +69,7 @@ var sum_pairs=function(ints, s){
 // Test.expect(sum_pairs(l8, 10)+"" == [13, -3]+"", "Subtraction: ["+l8+"] should return [13, -3] for sum = 10");
 // });
 
-
+// Alternate Faster Version
 var sum_pairs=function(ints, s){
 
   var count = 1,
@@ -84,7 +84,6 @@ var sum_pairs=function(ints, s){
           if (resultIndices.length > 0 && i > resultIndices[0][1]) {
             return [ints[i], ints[j]];
           } else if ( i == ints.length - 2 && resultIndices.length === 0) {
-            console.log('hi');
             noMatches = true;
             break;
           }
