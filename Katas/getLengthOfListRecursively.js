@@ -20,3 +20,12 @@ function lenR(x) {
 //lenR([]); // should return 0
 //lenR([2,1]); // should return 2
 lenR("hello"); // should return 5
+
+// Other solutions
+// function lenR(x) {
+//   if(x[0] === undefined){
+//    return 0
+//  } else {
+//    return 1 + lenR(x.slice(1))
+//  }
+// }
