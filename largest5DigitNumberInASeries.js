@@ -1,4 +1,6 @@
 // 5kyu Kata
+// Completed: 12/17/16
+
 
 
 function solution(digits){
