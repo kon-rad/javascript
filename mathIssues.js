@@ -35,3 +35,28 @@ Math.ceil(5) // should return  5
 
 // Test.assertEquals(Math.floor(0.4), 0, 'Math.floor(0.4)');
 // Test.assertEquals(Math.floor(0.5), 0, 'Math.floor(0.5)');
+
+
+
+
+
+//*************************************************************************//
+
+
+
+
+// Other Solutions
+// Credit: burce, FunGuy, mionu, Ulyana_Nikalayenko, Raman_Nerad, dhamilton (plus 5 more warriors)
+
+
+// Math.round = function(number) {
+//   return (number - parseInt(number) >= 0.5) ? parseInt(number) + 1 : parseInt(number) ;
+// };
+//
+// Math.ceil = function(number) {
+//   return (parseInt(number) === number) ? number : parseInt(number) + 1;
+// };
+//
+// Math.floor = function(number) {
+//   return parseInt(number);
+// };
