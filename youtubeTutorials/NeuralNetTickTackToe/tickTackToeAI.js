@@ -7,6 +7,7 @@
 // a different method is the monte carlo ttt game ai
 // Ean goodfellow, 'deep learning'
 // assembly - assembly code
+// link : https://chazomaticus.github.io/netttt/index.html
 
 var ttt = (function(ttt)){
 
