@@ -134,7 +134,7 @@ var Neuroevolution = function(options){
 				this.layers[i].neurons[j].value = self.options.activation(sum);
 			}
 			prevLayer = this.layers[i];
-		} 
+		}
 
 		var out = [];
 		var lastLayer = this.layers[this.layers.length - 1];
@@ -164,7 +164,7 @@ var Neuroevolution = function(options){
 					break;
 				}
 			}
-			
+
 		}
 		this.genomes.splice(i, 0, genome);
 	}
@@ -172,7 +172,7 @@ var Neuroevolution = function(options){
 	Generation.prototype.breed = function(g1, g2, nbChilds){
 		var datas = [];
 		for(var nb = 0; nb < nbChilds; nb++){
-			var data = JSON.parse(JSON.stringify(g1)); 
+			var data = JSON.parse(JSON.stringify(g1));
 			for(var i in g2.network.weights){
 				if(Math.random() <= 0.5){
 					data.network.weights[i] = g2.network.weights[i];
@@ -280,7 +280,7 @@ var Neuroevolution = function(options){
 		var nns = [];
 		for(var i in networks){
 			var nn = new Network();
-			nn.setSave(networks[i]);  
+			nn.setSave(networks[i]);
 			nns.push(nn);
 		}
 
