@@ -83,13 +83,15 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
         var day = id[0] + id[1];
         var mon = id[3] + id[4];
         var year = id[6] + id[7] + id[8] + id[9];
-        formattedDate.push(day).push(mon).push(year);
+        formattedDate.push(year);
+        formattedDate.push(mon)
+        formattedDate.push(day);
         return formattedDate;
     }
 
     var findDayOfWeek = function(date) {
       var dateObj = new Date(date[0], date[1], date[2]);
-      return date.getDate();
+      return dateObj.getDate();
     }
 
     var findNextDate = function(startDate, k) {
@@ -99,7 +101,7 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
       return newDate;
     }
 
-    var convertDateObjtoOutput = function(date) {
+    var convertDateObjToOutput = function(date) {
       var dd = date.getDate();
       var mm = date.getMonth() + 1;
       var yyyy = date.getFullYear();
@@ -109,7 +111,7 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
 
 
     var dow001ObjF = convertInputToDateObjFormat(firstDate);
-    var dow001String = dw[findDayOfWeek(dow001Obj)];
+    var dow001String = dw[findDayOfWeek(dow001ObjF)];
     var daysPerWeek = daysOfTheWeek.length;
     var positionOfDay = daysOfTheWeek.indexOf(dow001String);
     var results = [firstDate];
@@ -126,14 +128,29 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
         }
         daysDiff = betweenDays(dow001String, nextDayString);
         nextDateObjF = findNextDate(dow001ObjF, daysDiff);
-        results.push(convertDateObjToOutput(nextDateObj));
+        results.push(convertDateObjToOutput(nextDateObjF));
         dow001String = nextDayString;
         dow001ObjF = convertInputToDateObjFormat(convertDateObjToOutput(nextDateObjF));
         positionOfDay++;
       }
       nextDateObj = findNextDate(dow001ObjF, (k * 7));
-      results.push(convertDateObjToOutput(nextDate));
+      results.push(convertDateObjToOutput(nextDateObj));
+      dow001ObjF = convertInputToDateObjFormat(convertDateObjToOutput(nextDateObjF));
     }
     return results;
 }
-recurringTask();
+recurringTask("01/01/2015", 2, ["Monday", "Thursday"], 4);
+// //["01/01/2015",
+// "05/01/2015",
+// "15/01/2015",
+// "19/01/2015"]
+
+
+// ADD CUSTOM TEST
+// Test 1
+// Input:
+// firstDate: "01/01/2015"
+// k: 2
+// daysOfTheWeek: ["Monday",
+// "Thursday"]
+// n: 4
