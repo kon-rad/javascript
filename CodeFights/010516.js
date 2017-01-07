@@ -60,4 +60,34 @@ function smartAssigning(names, statuses, projects, tasks) {
     return names[highestIndex];
 }
 
-//
+// Recurring Task
+
+function recurringTask(firstDate, k, daysOfTheWeek, n) {
+    var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    var result = [];
+
+    var findDayOfWeek = function(date){
+        var dateObj = new Date(date);
+        var day = dateObj.getDay();
+        return day;
+    }
+
+    var convertInputToDateObjFormat = function(date) {
+        var formattedDate = [];
+        date = date.split('');
+        var day = date.splice(0, 2);
+        var month = date.splice(1,2);
+        var year = date.splice(2);
+        formattedDate.push(year.join(''));
+        formattedDate.push(month.join(''));
+        formattedDate.push(day.join(''));
+
+        return formattedDate ;
+    }
+
+    for (var i = 0; i < n; i++) {
+        result.push()
+    }
+}
