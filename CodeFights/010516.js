@@ -63,31 +63,77 @@ function smartAssigning(names, statuses, projects, tasks) {
 // Recurring Task
 
 function recurringTask(firstDate, k, daysOfTheWeek, n) {
-    var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var dw = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var daysDiff, nextDateObjF, nextDayString;
 
-    var result = [];
+    // helper functions
 
-    var findDayOfWeek = function(date){
-        var dateObj = new Date(date);
-        var day = dateObj.getDay();
-        return day;
+    var betweenDays = function(day1String, day2String) {
+      day1Index = dw.indexOf(day1String);
+      day2Index = dw.indexOf(day2String);
+      if (day1Index < day2Index)
+        return day2Index - day1Index;
+      else
+        return (7 - day1Index) + day2Index;
     }
 
-    var convertInputToDateObjFormat = function(date) {
+    var convertInputToDateObjFormat = function(id) {
         var formattedDate = [];
-        date = date.split('');
-        var day = date.splice(0, 2);
-        var month = date.splice(1,2);
-        var year = date.splice(2);
-        formattedDate.push(year.join(''));
-        formattedDate.push(month.join(''));
-        formattedDate.push(day.join(''));
-
-        return formattedDate ;
+        id = id.split('');
+        var day = id[0] + id[1];
+        var mon = id[3] + id[4];
+        var year = id[6] + id[7] + id[8] + id[9];
+        formattedDate.push(day).push(mon).push(year);
+        return formattedDate;
     }
 
-    for (var i = 0; i < n; i++) {
-        result.push()
+    var findDayOfWeek = function(date) {
+      var dateObj = new Date(date[0], date[1], date[2]);
+      return date.getDate();
     }
+
+    var findNextDate = function(startDate, k) {
+      var daysToAdd = k;
+      var newDate = new Date(startDate[0], startDate[1], startDate[2]);
+      newDate.setDate(newDate.getDate() + daysToAdd);
+      return newDate;
+    }
+
+    var convertDateObjtoOutput = function(date) {
+      var dd = date.getDate();
+      var mm = date.getMonth() + 1;
+      var yyyy = date.getFullYear();
+      return dd+ "/" + mm + "/" + yyyy;
+    }
+
+
+
+    var dow001ObjF = convertInputToDateObjFormat(firstDate);
+    var dow001String = dw[findDayOfWeek(dow001Obj)];
+    var daysPerWeek = daysOfTheWeek.length;
+    var positionOfDay = daysOfTheWeek.indexOf(dow001String);
+    var results = [firstDate];
+    var originalPos = positionOfDay;
+    positionOfDay++;
+
+    while(results.length < n ) {
+      if(results.length < daysPerWeek) {
+        if(daysOfTheWeek[positionOfDay] !== undefined && positionOfDay != originalPos) {
+          nextDayString = daysOfTheWeek[positionOfDay];
+        } else if (positionOfDay != originalPos) {
+            positionOfDay = 0;
+            nextDayString = daysOfTheWeek[positionOfDay];
+        }
+        daysDiff = betweenDays(dow001String, nextDayString);
+        nextDateObjF = findNextDate(dow001ObjF, daysDiff);
+        results.push(convertDateObjToOutput(nextDateObj));
+        dow001String = nextDayString;
+        dow001ObjF = convertInputToDateObjFormat(convertDateObjToOutput(nextDateObjF));
+        positionOfDay++;
+      }
+      nextDateObj = findNextDate(dow001ObjF, (k * 7));
+      results.push(convertDateObjToOutput(nextDate));
+    }
+    return results;
 }
+recurringTask();
