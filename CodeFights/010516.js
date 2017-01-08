@@ -78,6 +78,7 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
     }
 
     var convertInputToDateObjFormat = function(id) {
+      console.log(id);
         var formattedDate = [];
         id = id.split('');
         var day = id[0] + id[1];
@@ -86,12 +87,14 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
         formattedDate.push(year);
         formattedDate.push(mon)
         formattedDate.push(day);
+        console.log(formattedDate + " - convertInputToDateObjFormat");
         return formattedDate;
     }
 
     var findDayOfWeek = function(date) {
-      var dateObj = new Date(date[0], date[1], date[2]);
-      return dateObj.getDate();
+      var dateObj = new Date(date[0], (date[1] - 1), date[2]);
+      console.log(dateObj);
+      return dateObj.getDay();
     }
 
     var findNextDate = function(startDate, k) {
@@ -103,7 +106,11 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
 
     var convertDateObjToOutput = function(date) {
       var dd = date.getDate();
+      if (dd.length != 2)
+          dd = "0" + dd;
       var mm = date.getMonth() + 1;
+      if (mm.length != 2)
+          mm = "0" + mm;
       var yyyy = date.getFullYear();
       return dd+ "/" + mm + "/" + yyyy;
     }
@@ -112,6 +119,7 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
 
     var dow001ObjF = convertInputToDateObjFormat(firstDate);
     var dow001String = dw[findDayOfWeek(dow001ObjF)];
+      console.log(dow001String + " & " + dow001ObjF + " .. " + findDayOfWeek(dow001ObjF));
     var daysPerWeek = daysOfTheWeek.length;
     var positionOfDay = daysOfTheWeek.indexOf(dow001String);
     var results = [firstDate];
@@ -120,9 +128,9 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
 
     while(results.length < n ) {
       if(results.length < daysPerWeek) {
-        if(daysOfTheWeek[positionOfDay] !== undefined && positionOfDay != originalPos) {
+        if(daysOfTheWeek[positionOfDay] !== undefined) {
           nextDayString = daysOfTheWeek[positionOfDay];
-        } else if (positionOfDay != originalPos) {
+        } else {
             positionOfDay = 0;
             nextDayString = daysOfTheWeek[positionOfDay];
         }
@@ -132,10 +140,11 @@ function recurringTask(firstDate, k, daysOfTheWeek, n) {
         dow001String = nextDayString;
         dow001ObjF = convertInputToDateObjFormat(convertDateObjToOutput(nextDateObjF));
         positionOfDay++;
-      }
-      nextDateObj = findNextDate(dow001ObjF, (k * 7));
-      results.push(convertDateObjToOutput(nextDateObj));
+      } else {
+      nextDateObjF = findNextDate(dow001ObjF, (k * 7));
+      results.push(convertDateObjToOutput(nextDateObjF));
       dow001ObjF = convertInputToDateObjFormat(convertDateObjToOutput(nextDateObjF));
+      }
     }
     return results;
 }
