@@ -43,6 +43,6 @@ function main() {
     var d = parseInt(d_temp[0]);
     var m = parseInt(d_temp[1]);
     var result = getWays(s, d, m);
-    Console.log(result);
+    console.log(result);
 
 }
