@@ -6,6 +6,12 @@ import java.util.regex.*;
 
 public class Solution {
 
+    public static int getMinimumBevereges(int[] height, int k){
+        Arrays.sort(height);
+        int difference = height[height.length - 1] - k;
+        return (difference < 0) ? 0 : difference;
+    }
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
@@ -15,5 +21,7 @@ public class Solution {
             height[height_i] = in.nextInt();
         }
         // your code goes here
+        in.close();
+        System.out.println(getMinimumBevereges(height, k));
     }
 }
