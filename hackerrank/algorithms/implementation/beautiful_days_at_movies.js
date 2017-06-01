@@ -1,7 +1,6 @@
 function reversed(n){
 	var str = n + "";
 	str = str.split('').reverse();
-	console.log("reversed = " + str.join(''));
 	str = str.join('');
 	return Number(str);
 }
@@ -9,9 +8,9 @@ function reversed(n){
 function processData(input) {
     //Enter your code here
     input = input.split(' ');
-    var i = input[0],
-    	j = input[1],
-    	k = input[2],
+    var i = Number(input[0]),
+    	j = Number(input[1]),
+    	k = Number(input[2]),
     	count = 0;
     for(i; i <= j; i++){
     	var m = Math.abs(i - reversed(i));
