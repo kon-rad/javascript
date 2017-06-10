@@ -1,22 +1,31 @@
-function is_square(num){
-	if(Math.sqrt(num) % 1 === 0)
-		return ture;
-	return false;
+function find_first_square(num){
+    for(var i = num[0]; i <= num[1]; i++){
+        var sqrt = Math.sqrt(i) 
+        if(sqrt % 1 == 0){
+            return sqrt
+        }
+    }
+    return 0;
 }
 
 function processData(input) {
     //Enter your code here
     input = input.split('\n');
     for(var i = 1; i < input.length; i++){
-    	var result = 0;
-    	var num = input[i].split(' ');
-
-    	for(var j = num[0]; j <= num[1]; j++){
-    		// var sq = is_square(j);
-    		if(is_square(j))
-    			result++;
-    	}
-    	console.log(result);
+        var result = 0;
+        var num = input[i].split(' ');
+        var first = find_first_square(num);
+        var finding = true;
+        if (first != 0){
+            result++;
+            while (finding) {
+                if(Math.exp(first++, 2) <= num[1])
+                    result++;
+                else 
+                    finding = false;
+            }
+        }
+        console.log(result);
     }
 } 
 
