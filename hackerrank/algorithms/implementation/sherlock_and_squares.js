@@ -1,5 +1,7 @@
 function find_first_square(num){
-    for(var i = num[0]; i <= num[1]; i++){
+    var start = Number(num[0]);
+    var end = Number(num[1]);
+    for(var i = start; i <= end; i++){
         var sqrt = Math.sqrt(i) 
         if(sqrt % 1 == 0){
             return sqrt
@@ -17,9 +19,8 @@ function processData(input) {
         var first = find_first_square(num);
         var finding = true;
         if (first != 0){
-            result++;
             while (finding) {
-                if(Math.exp(first++, 2) <= num[1])
+                if(Math.pow(first++, 2) <= num[1])
                     result++;
                 else 
                     finding = false;
