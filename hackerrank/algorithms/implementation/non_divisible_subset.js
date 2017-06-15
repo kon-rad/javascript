@@ -1,7 +1,7 @@
 function is_divisible_by(num1, num2){
-	if (num1 % num2 === 0)
-		return true;
-	return false;
+  if (num1 % num2 === 0)
+    return true;
+  return false;
 }
 function getCombinations(arr) {
   var result = [];
@@ -15,15 +15,16 @@ function getCombinations(arr) {
   return result;
 }
 function test_for_divisibility(arr, k){
+    arr = arr.split('');
     for(var i = 0; i < arr.length; i++){
         for(var j = 0; j < arr.length; j++){
-            if (i != j && is_divisible_by((i+j), k)){
-                    return arr.length;
-            } else {
-                return false;   
+            var divisible = ((Number(arr[i]) + Number(arr[j])) % k === 0);
+            if (i != j && divisible){
+                    return false;
             } 
         }
     }
+    return arr.length;
 }
 function processData(input) {
     //Enter your code here
@@ -51,3 +52,4 @@ process.stdin.on("data", function (input) {
 process.stdin.on("end", function () {
    processData(_input);
 });
+
