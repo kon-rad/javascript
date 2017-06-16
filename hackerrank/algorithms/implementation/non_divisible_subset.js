@@ -3,12 +3,14 @@ function is_divisible_by(num1, num2){
     return true;
   return false;
 }
-function getCombinations(arr) {
+function getCombinations(arr, k) {
   var result = [];
   var f = function(prefix, arr) {
     for (var i = 0; i < arr.length; i++) {
-      result.push(prefix + arr[i]);
-      f(prefix + arr[i], arr.slice(i + 1));
+      if(test_for_divisibility((prefix + arr[i]), k)) {
+        result.push(prefix + arr[i]);
+        f(prefix + arr[i], arr.slice(i + 1));
+      }
     }
   }
   f('', arr);
@@ -32,7 +34,7 @@ function processData(input) {
     var k = input[0].split(' ');
     k = k[1];
     var arr = input[1].split(' ');
-    var combinations = getCombinations(arr);
+    var combinations = getCombinations(arr, k);
     var lengths = [];
     combinations.forEach(function(x){
         if(test_for_divisibility(x, k)){
