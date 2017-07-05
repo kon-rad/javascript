@@ -1,3 +1,4 @@
+
 process.stdin.resume();
 process.stdin.setEncoding('ascii');
 
@@ -27,63 +28,56 @@ function main() {
     var rQueen_temp = readLine().split(' ');
     var rQueen = parseInt(rQueen_temp[0]);
     var cQueen = parseInt(rQueen_temp[1]),
-        diagonals = 0,
-        diagonal_max_possible = 0,
-        obstacle_blocks = 0,
-        squares_blocked = 0,
-        possible_spaces = (cQueen - 1) + (n - cQueen) + (rQueen - 1) + (n - rQueen),
-        up_right = Math.min((n-cQueen), (n-rQueen)),
-        down_right = Math.min((n-cQueen), (rQueen-1)),
-        up_left = Math.min((cQueen-1), (n-rQueen)),
-        down_left = Math.min((cQueen-1), (rQueen-1));
+        row_right_min = n - cQueen,
+        row_left_min = cQueen - 1,
+        col_up_min = n - rQueen,
+        col_down_min = rQueen - 1,
+        spaces,
+        up_right_min = Math.min((n-cQueen), (n-rQueen)),
+        down_right_min = Math.min((n-cQueen), (rQueen-1)),
+        up_left_min = Math.min((cQueen-1), (n-rQueen)),
+        down_left_min = Math.min((cQueen-1), (rQueen-1));
     
     for(var a0 = 0; a0 < k; a0++){
         var rObstacle_temp = readLine().split(' ');
         var rObstacle = parseInt(rObstacle_temp[0]);
         var cObstacle = parseInt(rObstacle_temp[1]);
-        // check location of obstacl
-        // obstacle is on the same row as queen
         if (rObstacle == rQueen) {
-            // obstacle is to the right of queen
             if (cObstacle > cQueen) {
-                squares_blocked -= (n - cObstacle);
-            // obstacle is to the left of queen
+                spaces = (cObstacle - cQueen) - 1;
+                if (spaces < row_right_min) row_right_min = spaces;
             } else {
-                squares_blocked -= (cObstacle);
+                spaces = (cQueen - cObstacle) - 1;
+                if (spaces < row_left_min) row_left_min = spaces;
             }
-            // obstacle is on the same column as queen
         } else if (cObstacle == cQueen) {
             if (rObstacle > rQueen) {
-                squares_blocked -= (n - rObstacle) - 1;
+                spaces = ((rObstacle - rQueen) - 1);
+                if (spaces < col_up_min) col_up_min = spaces;
             } else {
-                squares_blocked -= rObstacle;
+                spaces = ((rQueen - rObstacle) - 1);
+                if (spaces < col_down_min) col_down_min = spaces;
             }
-           // obstacle is on a diagonal 
-        } else if ((rObstacle - rQueen) == (cObstacle - cQueen)) {
-            // obstacle is to the right of queen
+        } else if (Math.abs(rObstacle - rQueen) == Math.abs(cObstacle - cQueen)) {
             if (cObstacle > cQueen) {
-                // obstacle is above the queen
                 if (rObstacle > rQueen) {
-                    obstacle_blocks = Math.min((n - rObstacle), (n - cObstacle)) + 1;     
-                    up_right = up_right - obstacle_blocks;
-                // obstacle is below the queen
+                    spaces = ((cObstacle - cQueen) - 1); 
+                    if (spaces < up_right_min) up_right_min = spaces;
                 } else if (rObstacle < rQueen) {
-                    obstacle_blocks = Math.min((n - rObstacle), (n - cObstacle)) + 1;
-                    down_right = down_right - obstacle_blocks;
+                    spaces = ((cObstacle - cQueen) - 1);
+                    if (spaces < down_right_min) down_right_min = spaces;
                 }
-                // obstacle is to the left of queen
             } else if (cObstacle < cQueen) {
                 if (rObstacle > rQueen) {
-                    obstacle_blocks = Math.min((cObstacle-1), (n - rObstacle));
-                    up_left = up_left - obstacle_blocks;
+                    spaces = ((cQueen - cObstacle) - 1);
+                    if (spaces < up_left_min) up_left_min = spaces;
                 } else {
-                    obstacle_blocks = Math.min((cObstacle-1), (rObstacle-1));
-                    down_left = down_left - obstacle_blocks;
+                    spaces = ((cQueen - cObstacle) - 1);
+                    if (spaces < down_left_min) down_left_min = spaces;
                 }
                 
             }
         }
     }
-    console.log((possible_spaces + squares_blocked) + up_right+up_left+down_right+down_left);
-    //console.log(possible_spaces - obstacle_blocks);
+    console.log(row_left_min + row_right_min + col_up_min + col_down_min + up_right_min + up_left_min + down_right_min+down_left_min);
 }
