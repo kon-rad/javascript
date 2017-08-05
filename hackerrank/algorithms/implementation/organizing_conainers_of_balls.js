@@ -62,13 +62,16 @@ function main() {
            M[M_i] = M[M_i].map(Number);
         }
         // your code goes here
-        for(var i = 0; i < 10; i++) {
-            M = swap_function(M, n);
+        var rows_sums = M.forEach(function(item, index) {
+            M[index] =  item.reduce(getSum);
+        });
         console.log(M);
-            
-        }
-        console.log(check_matrix(M, n));
+        console.log(rows_sums);
     }
+}
+
+function getSum(total, num) {
+    return total + num;
 }
 
 
