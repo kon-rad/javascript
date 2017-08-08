@@ -57,16 +57,31 @@ function main() {
     for(var a0 = 0; a0 < q; a0++){
         var n = parseInt(readLine());
         var M = [];
+        var possible = true;
         for(M_i = 0; M_i < n; M_i++){
            M[M_i] = readLine().split(' ');
            M[M_i] = M[M_i].map(Number);
         }
         // your code goes here
-        var rows_sums = M.forEach(function(item, index) {
-            M[index] =  item.reduce(getSum);
+        var rows_sums = []
+        M.forEach(function(item, index) {
+            rows_sums[index] =  item.reduce(getSum);
         });
+        for(var i = 0; i < n; i++) {
+            var sum_col = 0;
+            for(var j = 0; j < n; j++) {
+                sum_col += M[j][i];
+            }
+            if(sum_col != rows_sums[i]){
+                possible = false;
+                break;
+            }
+        }
+        /*
         console.log(M);
         console.log(rows_sums);
+        */
+        console.log(possible ? "Possible" : "Impossible");
     }
 }
 
