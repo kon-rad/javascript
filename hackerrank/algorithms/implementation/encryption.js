@@ -22,7 +22,6 @@ function readLine() {
 
 function main() {
     var s = readLine();
-    s = s.split('');
     var length = s.length;
     var row = Math.floor(Math.sqrt(length));
     var col = Math.ceil(Math.sqrt(length));
@@ -32,7 +31,7 @@ function main() {
     }
     for(var i = 0; i < col; i++){
         for(var j = 0; j < row; j++){
-            encrypted.push(s[(j*col)+i]);
+            encrypted.push(s.charAt((j*col)+i));
         }
         encrypted.push(' ');
     }
