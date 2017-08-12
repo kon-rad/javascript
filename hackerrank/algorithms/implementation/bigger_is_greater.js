@@ -1,14 +1,19 @@
-function is_greater(original, new_combination) {
-    console.log('original: ');
-    console.log(original);
-    console.log('new_combination: ');
-    console.log(new_combination);
-    var len = original.length;
-    for(var i = 0; i < len; i++) {
-        if (original[i] < new_combination[i]) 
-            return true;
-    }
-    return false;                                    
+
+function sort_after_j(arr, j) {
+    var ending = arr.splice(j+1);
+    var len = ending.length;
+    do {
+        var swapped = false;
+        for (var i = 0; i < len - 1; i++) {
+            if (ending[i] > ending[i + 1] ) {
+                var tmp = ending[i+1];
+                ending[i+1] = ending[i];
+                ending[i] = tmp;
+                swapped = true;
+            }
+        }
+    } while (swapped);
+    return arr.concat(ending);
 }
 
 function swap_char(org_arr, i, j) {
@@ -24,18 +29,19 @@ function find_next_greatest(original) {
     var new_combo;
     var len = org_arr.length;
     for (var i = len; i >= 0; i--) {
+    	var first_letter = org_arr[i];
         for (var j = i-1; j >= 0; j--) {
-            new_combo = swap_char(org_arr, i, j);
-            if(is_greater(org_arr, new_combo))
-                return new_combo.join('');
+        	if(org_arr[j] < first_letter) {
+	            new_combo = swap_char(org_arr, i, j);
+	            new_combo = sort_after_j(new_combo, j);
+            	return new_combo.join('');
+        	}
         }
     }
     return 'no answer';
 }                                         
 
 function processData(input) {
-    //Enter your code here
-    console.log(input);
     var lines = input.split('\n');
     for (var i = 1; i < lines.length; i++) {
         console.log(find_next_greatest(lines[i]));                                 
