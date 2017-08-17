@@ -1,50 +1,47 @@
 
-function sort_after_j(arr, j) {
-    var ending = arr.splice(j+1);
-    var len = ending.length;
-    do {
-        var swapped = false;
-        for (var i = 0; i < len - 1; i++) {
-            if (ending[i] > ending[i + 1] ) {
-                var tmp = ending[i+1];
-                ending[i+1] = ending[i];
-                ending[i] = tmp;
-                swapped = true;
-            }
-        }
-    } while (swapped);
-    return arr.concat(ending);
+function permut(arr) {
+  if(arr.length < 2) return arr;
+  var permutations = [];
+  for(var i = 0; i < arr.length; i++) {
+    var char = arr[i];
+    if(arr.indexOf(char) != i)
+      continue;
+    var remainingString = arr.slice(0, i) + arr.slice(i+1, arr.length);
+    for (var subPermutation of permut(remainingString)){
+      permutations.push(char + subPermutation);
+    }
+  }
+  return permutations;
 }
 
-function swap_char(org_arr, i, j) {
-    var temp = org_arr[i];
-    org_arr[i] = org_arr[j];
-    org_arr[j] = temp;
-    return org_arr;
-    
+function order(arr) {
+  if (Array.isArray(arr)) {
+    arr = arr.sort();
+  }
+  return arr;
 }
-                                          
-function find_next_greatest(original) {
-    var org_arr = original.split('');
+
+
+function next_greatest(org) {
     var new_combo;
-    var len = org_arr.length;
-    for (var i = len; i >= 0; i--) {
-    	var first_letter = org_arr[i];
-        for (var j = i-1; j >= 0; j--) {
-        	if(org_arr[j] < first_letter) {
-	            new_combo = swap_char(org_arr, i, j);
-	            new_combo = sort_after_j(new_combo, j);
-            	return new_combo.join('');
-        	}
-        }
+    var len = org.length;
+    for (var i = len-1; i >= 0; i--) {
+          var end = org.slice(i, len);
+          new_combo = permut(end);
+          var sorted = order(new_combo);
+          if (sorted.indexOf(end) != sorted.length-1) {
+            return org.slice(0, i) + sorted[sorted.indexOf(end)+1];
+          }
+          
+          if(i ==4) break;
     }
     return 'no answer';
-}                                         
+}                                       
 
 function processData(input) {
     var lines = input.split('\n');
     for (var i = 1; i < lines.length; i++) {
-        console.log(find_next_greatest(lines[i]));                                 
+        console.log(next_greatest(lines[i]));                                 
     }                                      
 } 
 
