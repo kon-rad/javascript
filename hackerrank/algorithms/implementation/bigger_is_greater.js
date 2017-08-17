@@ -25,12 +25,17 @@ function order(arr) {
 function next_greatest(org) {
     var new_combo;
     var len = org.length;
+    var highest = org.charAt(len-1);
     for (var i = len-1; i >= 0; i--) {
-          var end = org.slice(i, len);
-          new_combo = permut(end);
-          var sorted = order(new_combo);
-          if (sorted.indexOf(end) != sorted.length-1) {
-            return org.slice(0, i) + sorted[sorted.indexOf(end)+1];
+          if (org.charAt(i) < highest) {
+              var end = org.slice(i, len);
+              new_combo = permut(end);
+              var sorted = order(new_combo);
+              if (sorted.indexOf(end) != sorted.length-1) {
+                return org.slice(0, i) + sorted[sorted.indexOf(end)+1];
+              }
+          } else if (org.charAt(i) > highest) {
+              highest = org.charAt(i);
           }
           
           if(i ==4) break;
