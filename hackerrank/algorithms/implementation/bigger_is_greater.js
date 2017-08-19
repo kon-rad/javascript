@@ -42,27 +42,6 @@ function next_permutation(arr, pred) {
         }
     }
 }
-function permut(arr) {
-  if(arr.length < 2) return arr;
-  var permutations = [];
-  for(var i = 0; i < arr.length; i++) {
-    var char = arr[i];
-    if(arr.indexOf(char) != i)
-      continue;
-    var remainingString = arr.slice(0, i) + arr.slice(i+1, arr.length);
-    for (var subPermutation of permut(remainingString)){
-      permutations.push(char + subPermutation);
-    }
-  }
-  return permutations;
-}
-
-function order(arr) {
-  if (Array.isArray(arr)) {
-    arr = arr.sort();
-  }
-  return arr;
-}
 
 
 function next_greatest(org) {
@@ -84,8 +63,6 @@ function next_greatest(org) {
           } else if (org.charAt(i) > highest) {
               highest = org.charAt(i);
           }
-          
-          if(i ==4) break;
     }
     return 'no answer';
 }                                       
