@@ -1,8 +1,25 @@
 function processData(input) {
-    //Enter your code here
+    input = input.split('\n');
+    var d = input[0].split(' ')[1],
+        sequence = input[1].split(' ');
+    sequence = sequence.map(Number);
+    d = parseInt(d);
+        count = 0;
+    for(var i = 0; i < sequence.length-2; i++) {
+        for (var j = 0; j < sequence.length-1; j++) {
+            if(sequence[j] - sequence[i] === d) {
+                for(var k = j+1; k<sequence.length; k++) {
+                    if(sequence[k]-sequence[j] === d) {
+                        count++;
+                    }
+                }
+            }
+        }
+    }
+    console.log(count);
 } 
 
-process.stdin.resume();
+process.stdin.resume();ac
 process.stdin.setEncoding("ascii");
 _input = "";
 process.stdin.on("data", function (input) {
