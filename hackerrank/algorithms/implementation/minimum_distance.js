@@ -29,16 +29,16 @@ function main() {
         num = {};
     for(var i = 0; i < A.length; i++) {
         if(num[A[i]]) {
-            var dist = i - (parseInt(A[i]) - 1);
-            console.log('dist =', dist);
-            console.log('i =', i);
-            pairs.push(num[(parseInt(A[i]) -1)]);
+            var dist = i - (num[parseInt(A[i])] - 1);
+            pairs.push(dist);
         } 
         num[A[i]] = (i+1);
    
     }
-    min = Math.min(pairs);
+    if(pairs.length > 0) {
+    min = Math.min.apply(null, pairs);
     console.log(min);
-    console.log(pairs);
-    console.log(num);
+    } else {
+        console.log(-1);
+    }
 }
