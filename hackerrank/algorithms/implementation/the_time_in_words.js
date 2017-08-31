@@ -29,17 +29,19 @@ function main() {
     var sn = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
     var tn = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
     var ts = ['', '', 'twenty', 'thirty', 'fourty', 'fifty'];
-    console.log(h,m);
     
-    function dict(m){
+    function dict(m, hr){
+        if(!hr && m > 30) {
+            m = 60 - m;
+        }
         m = m+'';
         m = m.split('');
         if (m.length == 2 && m[0] == 1) {
-            return tn[parseInt(m[1])];
+            return tn[parseInt(m[1])] + (hr?"":" minutes");
         } else if (m.length == 1) {
-            return sn[parseInt(m[0])];
+            return sn[parseInt(m[0])] + (hr?"":" minutes");
         } else {
-            return tn[parseInt(m[0])] + " " + sn[parseInt(m[1])];
+            return ts[parseInt(m[0])] + " " + sn[parseInt(m[1])] + (hr?"":" minutes");
         }
     }
     
@@ -51,14 +53,21 @@ function main() {
             min = 'quarter';
             break;
         case 30:
-            min = 'half past';
+            min = 'half';
+            break;
+        case 45:
+            min = 'quarter';
             break;
         default:
-            min = dict(m);
+            min = dict(m, false);
     }
-    hour = dict(hour);
-    if (min = '') {
-        console.log(hour + " o'clock");
-    } else if ()
+    hour = dict((m <= 30)?h:h+1, true);
+    if (min == '') {
+        console.log(hour + " o' clock");
+    } else if (m <= 30) {
+        console.log(min + " past " + hour);
+    } else {
+        console.log(min + " to " + hour);
+    }
 
 }
