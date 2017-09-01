@@ -49,11 +49,14 @@ function main() {
         case 0:
             min = '';
             break;
+        case 1:
+            min = 'one minute';
+            break;
         case 15:
             min = 'quarter';
             break;
         case 30:
-            min = 'half';
+            min = 'half past';
             break;
         case 45:
             min = 'quarter';
