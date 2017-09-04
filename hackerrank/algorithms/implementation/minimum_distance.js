@@ -24,20 +24,19 @@ function main() {
     var n = parseInt(readLine());
     A = readLine().split(' ');
     A = A.map(Number);
-    var min,
-        pairs = [],
+    var min = A.length+1,
         num = {};
     for(var i = 0; i < A.length; i++) {
         if(num[A[i]]) {
             var dist = i - (num[parseInt(A[i])] - 1);
-            pairs.push(dist);
+            if(dist < min) min = dist;
+            if(min === 1) break;
         } 
         num[A[i]] = (i+1);
    
     }
-    if(pairs.length > 0) {
-    min = Math.min.apply(null, pairs);
-    console.log(min);
+    if(min != A.length+1) {
+        console.log(min);
     } else {
         console.log(-1);
     }
