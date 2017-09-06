@@ -39,18 +39,18 @@ function main() {
             }
         }
     } while (swapped);
-    for(var i = 0; i < c.length-1; i++) {
+    var limit = (c.length>1)?(c.length-1):(c.length)
+    for(var i = 0; i < limit; i++) {
         if(i === 0) {
             max = c[i];
-        } else if (i === c.length-2){
-            var dist = n-c[i+1]-1;
-            
-        } else if (c[i]+1 != c[i+1]) {
+        }
+        if (c[i]+1 != c[i+1]) {
             var diff = Math.abs(c[i]-c[i+1]);
             var dist = Math.floor(diff/2);
         }
         if(dist > max) max = dist;
     }
+    if(n-c[c.length-1]-1 > max) max = n-c[c.length-1]-1;
     console.log(max);
     
 }
