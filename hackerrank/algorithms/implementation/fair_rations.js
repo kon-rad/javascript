@@ -1,5 +1,3 @@
-
-
 process.stdin.resume();
 process.stdin.setEncoding('ascii');
 
@@ -13,9 +11,7 @@ process.stdin.on('data', function (data) {
 
 process.stdin.on('end', function () {
     input_stdin_array = input_stdin.split("\n");
-    //onsole.time('fuctionTotal');
-    main(); 
-//console.timeEnd('fuctionTotal');   
+    main();    
 });
 
 function readLine() {
@@ -33,32 +29,31 @@ function main() {
     B = readLine().split(' ');
     B = B.map(Number);
     var count = 0;
-    for(var i = 0; i < B.length; i++) {
-        var secondToLast = (i === B.length-2);
-        if (i === B.length) {
-            if(!isEven(B[i])){
-                //console.log(count, i, 1);
+    var secondToLast;
+    var curE,
+        len = B.length;
+    for(var i = 0; i < len; i++) {
+        secondToLast = (i === len-2);
+        curE = isEven(B[i]);
+        nxtE = isEven(B[i+1]);
+        if (i === len) {
+            if(!curE){
                 return console.log('NO');
             } else {
                 continue;
             }
-        } else if(secondToLast && !isEven(B[i]) && isEven(B[i+1])) {
-             //console.log(count, i, 2);
+        } else if(secondToLast && !curE && nxtE) {
              return console.log('NO');
-        } else if (secondToLast && !isEven(B[i]) && !isEven(B[i+1])) {
+        } else if ((secondToLast && !curE) && !nxtE) {
                 B[i]++;
                 B[i+1]++;
                 count += 2;
-        } else if (!isEven(B[i])){
-            if((!secondToLast && (isEven(B[i+1]) && !isEven(B[i+2]))) || !isEven(B[i+1])){
+        } else if (!curE){
+            if((!secondToLast && nxtE && !isEven(B[i+2])) || !nxtE){
                 B[i]++;
                 B[i+1]++;
                 count += 2;
             } else {
-                /*
-                console.log(count, i, 3);
-                return console.log('NO');
-                */
                 B[i]++;
                 B[i+1]++;
                 count += 2;
