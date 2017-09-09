@@ -33,22 +33,17 @@ function main() {
     for(var grid_i = 1; grid_i < n-1; grid_i++){
        var row = grid[grid_i];
        for(var i = 1; i < row.length-1; i++){
-           if (row[i]>=row[i-1] && row[i]>=row[i+1]){
-               for(var j = 0; j<3;j++){
-                   if(!(grid[grid_i-1][j] <= row[i] && grid[grid_i+1][j]<=row[i])){
-                       notCavity = true;
-                   }
+           if (row[i]>row[i-1] && row[i]>row[i+1]){
+               if(!(grid[grid_i-1][i] < row[i] && grid[grid_i+1][i]<row[i])){
+                   notCavity = true;
                }
                if(!notCavity){
-                   xCoordinates.push([[grid_i],[i]]);
+                   grid[grid_i][i] = 'X';
                }
                notCavity = false
            }
        }
     }
-    xCoordinates.forEach(function(item){
-        grid[item[0]][item[1]] = 'X';
-    })
     grid.forEach(function(item){
         console.log(item.join(''));
     })
