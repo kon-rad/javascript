@@ -48,7 +48,6 @@ function main() {
                 }
             }
         }
-        //console.log(ldbs);
         console.log(possible);  
     }
     function singlesExist() {
