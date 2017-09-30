@@ -30,20 +30,30 @@ function main() {
     // Print the number of ways of making change for 'n' units using coins having the values given by 'c'
     if(n === 0)
         return console.log('1');
-    var ways = findChange(s, m, n);
+    var memo = {};
+    var ways = findChange(s, n, 0, memo);
     console.log(ways);
     
-    function findChange(s, m, n) {
-        var arr = [];
-        arr[0] = 1;
-        for(var k = 1; k<=n;k++) {
-            arr[k] = 0;
-        }
-        for (var i = 0; i < m; i++) {
-            for (var j = s[i]; j <= n; j++) {
-                arr[j] += arr[j - s[i]];
-            }
-        }
-        return arr[n];
+    function findChange(coins, money, index, memo) {
+
+      if(money === 0) {
+        return 1;
+      }
+      if (index >= coins.length) {
+        return 0;
+      }
+      var key = money+'-'+index;
+      if (memo.hasOwnProperty(key)) {
+        return memo[key];
+      }
+      var ways = 0;
+      var amountWithCoin = 0;
+      while (amountWithCoin <= money) {
+        var remaining = money - amountWithCoin;
+        ways += findChange(coins, remaining, index+1, memo);
+        amountWithCoin += coins[index];
+      }
+      memo[key] = ways;
+      return ways;
     }
 }
