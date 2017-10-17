@@ -41,12 +41,9 @@ function main() {
         } else {
             bObj[bArr[i]] = 1;
         }
-    }
-    //console.log(a, b, aObj, bObj, count);  
-    count = countDiff(aObj, bObj, count);
-    //console.log(a, b, aObj, bObj, count);  
+    } 
+    count = countDiff(aObj, bObj, count); 
     count = countDiff(bObj, aObj, count);
-    //console.log(a, b, aObj, bObj, count); 
     console.log(count);
 }
 
