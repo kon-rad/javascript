@@ -42,11 +42,9 @@ function main() {
             ranObj[item] = 1;
         }
     })
-    //console.log(ranObj, magObj);
     for(var letter in ranObj) {
         var len = ranObj[letter];
         for(var i = 0; i < len; i++) {
-            //console.log(magObj.hasOwnProperty(letter));
             if ( magObj.hasOwnProperty(letter) == false ) {
                 console.log('No');
                 return;
@@ -58,5 +56,4 @@ function main() {
         }
     }
     console.log('Yes');
-    //console.log(ranObj, magObj);
 }
